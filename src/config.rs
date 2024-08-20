@@ -70,7 +70,7 @@ pub struct FeatureFlags {
 }
 
 impl Config {
-    pub fn new() -> Result<Self, ConfigError> {
+    pub fn load() -> Result<Self, ConfigError> {
         let run_mode = env::var("RUN_MODE").unwrap_or_else(|_| "development".into());
 
         let s = ConfigRs::builder()
