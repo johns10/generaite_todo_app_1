@@ -1,6 +1,6 @@
-use clap::{Command, ArgMatches};
+use clap::Command;
 use crate::config::Config;
-use sea_orm::{Database, DatabaseConnection};
+use sea_orm::{Database, DatabaseConnection, ConnectionTrait, Statement};
 
 pub fn create_db_command() -> Command {
     Command::new("create-db")
@@ -19,7 +19,7 @@ pub async fn handle_create_db(config: &Config) -> Result<(), Box<dyn std::error:
     let db: DatabaseConnection = Database::connect(&db_url).await?;
 
     let create_db_query = format!("CREATE DATABASE \"{}\"", config.database.name);
-    db.execute_unprepared(&create_db_query).await?;
+    db.execute(Statement::from_string(db.get_database_backend(), create_db_query)).await?;
 
     println!("Database '{}' created successfully.", config.database.name);
 

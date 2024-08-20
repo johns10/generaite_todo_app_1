@@ -2,7 +2,6 @@ mod config;
 mod cli;
 
 use config::Config;
-use clap::Command;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
