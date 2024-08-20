@@ -1,4 +1,5 @@
 version = "0.1.0"
+frontend_url = "http://localhost:3000"
 
 [database]
 host = "localhost"
@@ -21,8 +22,6 @@ level = "info"
 [rate_limiting]
 requests = 100
 duration = 60
-
-frontend_url = "http://localhost:3000"
 
 [feature_flags]
 enable_feature_x = false
