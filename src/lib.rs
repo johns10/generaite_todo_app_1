@@ -7,3 +7,6 @@ pub fn create_app(_config: config::Config, _db: DatabaseConnection) -> Router {
     // TODO: Implement the actual app creation logic
     Router::new()
 }
+
+// Explicitly re-export create_app
+pub use self::create_app;
