@@ -1,4 +1,4 @@
-use gen_todo::{config::Config, create_app};
+use crate::{config::Config, create_app};
 use axum::Router;
 use sea_orm::{Database, DatabaseConnection};
 use uuid::Uuid;
