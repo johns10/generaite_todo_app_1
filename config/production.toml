@@ -1,0 +1,13 @@
+environment = "production"
+
+[database]
+connection_pool_size = 10
+
+[logging]
+level = "warn"
+
+[rate_limiting]
+requests = 50
+duration = 60
+
+sentry_dsn = "https://your_sentry_dsn_for_production"

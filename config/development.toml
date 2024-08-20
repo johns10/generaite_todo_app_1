@@ -1,0 +1,10 @@
+environment = "development"
+
+[database]
+name = "todo_app_dev"
+
+[logging]
+level = "debug"
+
+[feature_flags]
+enable_feature_x = true
