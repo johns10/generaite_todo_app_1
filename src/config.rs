@@ -4,6 +4,7 @@ use std::env;
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
+    pub version: String,
     pub environment: String,
     pub database: DatabaseConfig,
     pub server: ServerConfig,
