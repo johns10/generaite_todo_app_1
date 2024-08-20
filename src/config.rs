@@ -26,6 +26,8 @@ pub struct DatabaseConfig {
     pub user: String,
     pub password: String,
     pub connection_pool_size: Option<u32>,
+    #[cfg(test)]
+    pub test_name: String,
 }
 
 #[derive(Debug, Deserialize)]
