@@ -3,34 +3,34 @@
 ## Environment Setup
 
 ### Install Rust
-- Download and run rustup
-- Verify installation with `rustc --version`
+x Download and run rustup
+x Verify installation with `rustc --version`
 
 ### Install Cargo
-- Verify Cargo installation with `cargo --version`
+x Verify Cargo installation with `cargo --version`
 
 ### Set up version control
-- Initialize git repository
-- Create .gitignore file
+x Initialize git repository
+x Create .gitignore file
 
 ### Install additional tools
-- Install cargo-watch: `cargo install cargo-watch`
-- Install Aider: `pip install aider-chat`
+x Install cargo-watch: `cargo install cargo-watch`
+x Install Aider: `pip install aider-chat`
 
 ## Project Initialization
 
 ### Create new Rust project
-- Run `cargo new todo_app`
-- Navigate to project directory
+x Run `cargo new todo_app`
+x Navigate to project directory
 
 ### Set up initial project structure
-- Create src/models directory
-- Create src/services directory
-- Create src/repositories directory
-- Create src/handlers directory
-- Create src/routes directory
-- Create src/utils directory
-- Create tests directory
+x Create src/models directory
+x Create src/services directory
+x Create src/repositories directory
+x Create src/handlers directory
+x Create src/routes directory
+x Create src/utils directory
+x Create tests directory
 
 Unix
 
@@ -43,21 +43,23 @@ Windows
 ### Initialize README.md
 - Add project description
 
+`touch README.md`
+
 ## Dependencies Setup
 
 ### Add core dependencies to Cargo.toml
-- Add axum
-- Add tokio with full features
-- Add sea-orm
-- Add sea-orm-migration
+x Add axum
+x Add tokio with full features
+x Add sea-orm
+x Add sea-orm-migration
 
 ### Add utility dependencies
-- Add serde for serialization
-- Add chrono for datetime handling
-- Add uuid for unique identifiers
+x Add serde for serialization
+x Add chrono for datetime handling
+x Add uuid for unique identifiers
 
 ### Add development dependencies
-- Add tokio-test to dev-dependencies
+x Add tokio-test to dev-dependencies
 
 ```
 cargo install cargo-edit
@@ -70,13 +72,11 @@ cargo add --dev tokio-test
 ## Configuration Setup
 
 ### Create configuration file
-- Add src/config.rs file
-- Add placeholder for Config struct
+/web https://docs.rs/config/latest/config/
+Create the src/config.rs file and add placeholder for Config struct 
 
 ### Set up environment variables
-- Create .env file
-- Add placeholder for database URL in .env
-- Add placeholder for server port in .env
+- Create .env file with a placeholder for database URL in .env and placeholder for server port in .env
 
 ## Database Setup
 
