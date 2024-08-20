@@ -1,4 +1,6 @@
-use crate::config::Config;
+mod config;
+
+use config::Config;
 
 #[tokio::main]
 async fn main() {
