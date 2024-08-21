@@ -10,6 +10,7 @@ src/
 ├── repositories/
 ├── context/
 ├── cli/
+├── config/
 ├── templates/
 └── utils/
 
