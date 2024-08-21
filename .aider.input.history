@@ -1,0 +1,738 @@
+
+# 2024-08-20 09:55:20.469352
++Create .env.example file with placeholders for all the variables relevant to this project. Accomodate for test, dev, and production environments.
+
+# 2024-08-20 09:59:18.034478
++Create a src/config.rs file and a Config struct. It should use environment variables wherever possible, and manage the dev, test, and prod environment variables. https://docs.rs/config/latest/config/
+
+# 2024-08-20 10:02:11.478224
++/undo
+
+# 2024-08-20 10:02:49.478992
++Create a src/config.rs file and a Config struct. It should use environment variables wherever possible, and manage the dev, test, and prod environment variables. If you delegate any configuration to seperate files, create them now. Do not add anything else to the project at this time, just configuration. https://docs.rs/config/latest/config/
+
+# 2024-08-20 10:06:05.337751
++error[E0624]: associated function `new` is private
++  --> src/main.rs:5:26
++   |
++5  |     let config = Config::new().expect("Failed to load config...
++   |                          ^^^ private associated function
++   |
++  ::: /Users/johndavenport/.cargo/registry/src/index.crates.io-6f17d22bba15001f/config-0.14.0/src/config.rs:39:5
++   |
++39 |     pub(crate) fn new(value: Value) -> Self {
++   |     --------------------------------------- private associated function defined here
++
++error[E0061]: this function takes 1 argument but 0 arguments were supplied
++  --> src/main.rs:5:18
++   |
++5  |     let config = Config::new().expect("Failed to load config...
++   |                  ^^^^^^^^^^^-- an argument of type `Value` is missing
++   |
++note: associated function defined here
++  --> /Users/johndavenport/.cargo/registry/src/index.crates.io-6f17d22bba15001f/config-0.14.0/src/config.rs:39:19
++   |
++39 |     pub(crate) fn new(value: Value) -> Self {
++   |                   ^^^
++help: provide the argument
++   |
++5  |     let config = Config::new(/* Value */).expect("Failed to load configuration");
++   |                             ~~~~~~~~~~~~~
++
++error[E0599]: no method named `expect` found for struct `Config` in the current scope
++ --> src/main.rs:5:32
++  |
++5 | ...fig::new().expect("Failed to load configuration");
++  |               ^^^^^^ method not found in `Config`
++
++Some errors have detailed explanations: E0061, E0599, E0624.
++For more information about an error, try `rustc --explain E0061`.
++error: could not compile `gen_todo` (bin "gen_todo") due to 3 previous errors
+
+# 2024-08-20 10:06:55.914722
++/drop design/architecture.md
+
+# 2024-08-20 10:07:03.881362
++/drop design/code_standards.md
+
+# 2024-08-20 10:07:08.945580
++/drop design/folder_structure.md
+
+# 2024-08-20 10:07:11.853802
++/drop design/tech_stack.md
+
+# 2024-08-20 10:07:15.960275
++error[E0432]: unresolved import `crate::config`
++ --> src/main.rs:1:12
++  |
++1 | use crate::config::Config;
++  |            ^^^^^^ could not find `config` in the crate root
++
++For more information about this error, try `rustc --explain E0432`.
++error: could not compile `gen_todo` (bin "gen_todo") due to 1 previous error
+
+# 2024-08-20 10:08:25.941240
++error[E0252]: the name `ConfigRs` is defined multiple times
++  --> src/config.rs:95:14
++   |
++1  | use config::{Config as ConfigRs, ConfigError, Environment, F...
++   |              ------------------ previous import of the type `ConfigRs` here
++...
++95 | use config::{Config as ConfigRs, ConfigError, Environment, F...
++   |              ^^^^^^^^^^^^^^^^^^--
++   |              |
++   |              `ConfigRs` reimported here
++   |              help: remove unnecessary import
++   |
++   = note: `ConfigRs` must be defined only once in the type namespace of this module
++
++error[E0252]: the name `ConfigError` is defined multiple times
++  --> src/config.rs:95:34
++   |
++1  | ...fig as ConfigRs, ConfigError, Environment, File};
++   |                     ----------- previous import of the type `ConfigError` here
++...
++95 | ...fig as ConfigRs, ConfigError, Environment, File};
++   |                     ^^^^^^^^^^^--
++   |                     |
++   |                     `ConfigError` reimported here
++   |                     help: remove unnecessary import
++   |
++   = note: `ConfigError` must be defined only once in the type namespace of this module
++
++error[E0252]: the name `Environment` is defined multiple times
++  --> src/config.rs:95:47
++   |
++1  | ...Rs, ConfigError, Environment, File};
++   |                     ----------- previous import of the type `Environment` here
++...
++95 | ...Rs, ConfigError, Environment, File};
++   |                     ^^^^^^^^^^^--
++   |                     |
++   |                     `Environment` reimported here
++   |                     help: remove unnecessary import
++   |
++   = note: `Environment` must be defined only once in the type namespace of this module
++
++error[E0252]: the name `File` is defined multiple times
++  --> src/config.rs:95:60
++   |
++1  | ...ment, File};
++   |          ---- previous import of the type `File` here
++...
++95 | ...ment, File};
++   |          ^^^^ `File` reimported here
++   |
++   = note: `File` must be defined only once in the type namespace of this module
++
++error[E0252]: the name `Deserialize` is defined multiple times
++  --> src/config.rs:96:5
++   |
++2  | use serde::Deserialize;
++   |     ------------------ previous import of the trait `Deserialize` here
++...
++96 | use serde::Deserialize;
++   |     ^^^^^^^^^^^^^^^^^^ `Deserialize` reimported here
++   |
++   = note: `Deserialize` must be defined only once in the type namespace of this module
++
++error[E0252]: the name `env` is defined multiple times
++  --> src/config.rs:97:5
++   |
++3  | use std::env;
++   |     -------- previous import of the module `env` here
++...
++97 | use std::env;
++   |     ^^^^^^^^ `env` reimported here
++   |
++   = note: `env` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `Config` is defined multiple times
++   --> src/config.rs:100:1
++    |
++6   | pub struct Config {
++    | ----------------- previous definition of the type `Config` here
++...
++100 | pub struct Config {
++    | ^^^^^^^^^^^^^^^^^ `Config` redefined here
++    |
++    = note: `Config` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `DatabaseConfig` is defined multiple times
++   --> src/config.rs:115:1
++    |
++21  | pub struct DatabaseConfig {
++    | ------------------------- previous definition of the type `DatabaseConfig` here
++...
++115 | pub struct DatabaseConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^^^^^ `DatabaseConfig` redefined here
++    |
++    = note: `DatabaseConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `ServerConfig` is defined multiple times
++   --> src/config.rs:125:1
++    |
++31  | pub struct ServerConfig {
++    | ----------------------- previous definition of the type `ServerConfig` here
++...
++125 | pub struct ServerConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^^^ `ServerConfig` redefined here
++    |
++    = note: `ServerConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `JwtConfig` is defined multiple times
++   --> src/config.rs:131:1
++    |
++37  | pub struct JwtConfig {
++    | -------------------- previous definition of the type `JwtConfig` here
++...
++131 | pub struct JwtConfig {
++    | ^^^^^^^^^^^^^^^^^^^^ `JwtConfig` redefined here
++    |
++    = note: `JwtConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `LoggingConfig` is defined multiple times
++   --> src/config.rs:137:1
++    |
++43  | pub struct LoggingConfig {
++    | ------------------------ previous definition of the type `LoggingConfig` here
++...
++137 | pub struct LoggingConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^^^^ `LoggingConfig` redefined here
++    |
++    = note: `LoggingConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `RedisConfig` is defined multiple times
++   --> src/config.rs:142:1
++    |
++48  | pub struct RedisConfig {
++    | ---------------------- previous definition of the type `RedisConfig` here
++...
++142 | pub struct RedisConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^^ `RedisConfig` redefined here
++    |
++    = note: `RedisConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `SmtpConfig` is defined multiple times
++   --> src/config.rs:147:1
++    |
++53  | pub struct SmtpConfig {
++    | --------------------- previous definition of the type `SmtpConfig` here
++...
++147 | pub struct SmtpConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^ `SmtpConfig` redefined here
++    |
++    = note: `SmtpConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `RateLimitingConfig` is defined multiple times
++   --> src/config.rs:156:1
++    |
++62  | pub struct RateLimitingConfig {
++    | ----------------------------- previous definition of the type `RateLimitingConfig` here
++...
++156 | pub struct RateLimitingConfig {
++    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `RateLimitingConfig` redefined here
++    |
++    = note: `RateLimitingConfig` must be defined only once in the type namespace of this module
++
++error[E0428]: the name `FeatureFlags` is defined multiple times
++   --> src/config.rs:162:1
++    |
++68  | pub struct FeatureFlags {
++    | ----------------------- previous definition of the type `FeatureFlags` here
++...
++162 | pub struct FeatureFlags {
++    | ^^^^^^^^^^^^^^^^^^^^^^^ `FeatureFlags` redefined here
++    |
++    = note: `FeatureFlags` must be defined only once in the type namespace of this module
++
++warning: unused imports: `Config as ConfigRs`, `ConfigError`, `Environment`, and `File`
++  --> src/config.rs:95:14
++   |
++95 | ...::{Config as ConfigRs, ConfigError, Environment, File};
++   |       ^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^^^^^^^^  ^^^^
++   |
++   = note: `#[warn(unused_imports)]` on by default
++
++warning: unused import: `serde::Deserialize`
++  --> src/config.rs:96:5
++   |
++96 | use serde::Deserialize;
++   |     ^^^^^^^^^^^^^^^^^^
++
++warning: unused import: `std::env`
++  --> src/config.rs:97:5
++   |
++97 | use std::env;
++   |     ^^^^^^^^
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::Config`
++  --> src/config.rs:99:10
++   |
++5  | #[derive(Debug, Deserialize)]
++   |          ----- first implementation here
++...
++99 | #[derive(Debug, Deserialize)]
++   |          ^^^^^ conflicting implementation for `config::Config`
++   |
++   = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::DatabaseConfig`
++   --> src/config.rs:114:10
++    |
++20  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++114 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::DatabaseConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::ServerConfig`
++   --> src/config.rs:124:10
++    |
++30  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++124 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::ServerConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::JwtConfig`
++   --> src/config.rs:130:10
++    |
++36  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++130 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::JwtConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::LoggingConfig`
++   --> src/config.rs:136:10
++    |
++42  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++136 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::LoggingConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::RedisConfig`
++   --> src/config.rs:141:10
++    |
++47  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++141 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::RedisConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::SmtpConfig`
++   --> src/config.rs:146:10
++    |
++52  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++146 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::SmtpConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::RateLimitingConfig`
++   --> src/config.rs:155:10
++    |
++61  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++155 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::RateLimitingConfig`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Debug` for type `config::FeatureFlags`
++   --> src/config.rs:161:10
++    |
++67  | #[derive(Debug, Deserialize)]
++    |          ----- first implementation here
++...
++161 | #[derive(Debug, Deserialize)]
++    |          ^^^^^ conflicting implementation for `config::FeatureFlags`
++    |
++    = note: this error originates in the derive macro `Debug` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::Config`
++  --> src/config.rs:99:17
++   |
++5  | #[derive(Debug, Deserialize)]
++   |                 ----------- first implementation here
++...
++99 | #[derive(Debug, Deserialize)]
++   |                 ^^^^^^^^^^^ conflicting implementation for `config::Config`
++   |
++   = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::DatabaseConfig`
++   --> src/config.rs:114:17
++    |
++20  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++114 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::DatabaseConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::ServerConfig`
++   --> src/config.rs:124:17
++    |
++30  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++124 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::ServerConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::JwtConfig`
++   --> src/config.rs:130:17
++    |
++36  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++130 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::JwtConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::LoggingConfig`
++   --> src/config.rs:136:17
++    |
++42  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++136 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::LoggingConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::RedisConfig`
++   --> src/config.rs:141:17
++    |
++47  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++141 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::RedisConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::SmtpConfig`
++   --> src/config.rs:146:17
++    |
++52  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++146 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::SmtpConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::RateLimitingConfig`
++   --> src/config.rs:155:17
++    |
++61  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++155 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::RateLimitingConfig`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++error[E0119]: conflicting implementations of trait `Deserialize<'_>` for type `config::FeatureFlags`
++   --> src/config.rs:161:17
++    |
++67  | #[derive(Debug, Deserialize)]
++    |                 ----------- first implementation here
++...
++161 | #[derive(Debug, Deserialize)]
++    |                 ^^^^^^^^^^^ conflicting implementation for `config::FeatureFlags`
++    |
++    = note: this error originates in the derive macro `Deserialize` (in Nightly builds, run with -Z macro-backtrace for more info)
++
++warning: unused variable: `config`
++ --> src/main.rs:7:9
++  |
++7 |     let config = Config::load().expect("Failed to load config...
++  |         ^^^^^^ help: if this is intentional, prefix it with an underscore: `_config`
++  |
++  = note: `#[warn(unused_variables)]` on by default
++
++Some errors have detailed explanations: E0119, E0252, E0428.
++For more information about an error, try `rustc --explain E0119`.
++warning: `gen_todo` (bin "gen_todo") generated 4 warnings
++error: could not compile `gen_todo` (bin "gen_todo") due to 33 previous errors; 4 warnings emitted
+
+# 2024-08-20 10:09:29.315402
++Create a cli module for managing cli commands. It should be started from main. Include a version cli method that returns the version of the project. Set the version variable in the appropriate place in config.
+
+# 2024-08-20 10:09:47.997884
++/add design/code_standards.md
+
+# 2024-08-20 10:09:53.839369
++/add design/folder_structure.md
+
+# 2024-08-20 10:09:57.697738
++Create a cli module for managing cli commands. It should be started from main. Include a version cli method that returns the version of the project. Set the version variable in the appropriate place in config.
+
+# 2024-08-20 10:10:46.265276
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+# 2024-08-20 10:11:36.080729
++/drop design/code_standards.md
+
+# 2024-08-20 10:11:39.592846
++/drop design/folder_structure.md
+
+# 2024-08-20 10:12:08.640661
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+# 2024-08-20 10:13:56.502827
++/ls
+
+# 2024-08-20 10:14:12.509790
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+# 2024-08-20 10:14:36.806795
++/drop .gitignore
+
+# 2024-08-20 10:14:41.584355
++/drop Cargo.lock
+
+# 2024-08-20 10:14:46.990196
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+# 2024-08-20 10:17:52.380100
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++stack backtrace:
++   0: _rust_begin_unwind
++   1: core::panicking::panic_fmt
++   2: core::result::unwrap_failed
++   3: gen_todo::main::{{closure}}
++   4: tokio::runtime::park::CachedParkThread::block_on
++   5: tokio::runtime::context::runtime::enter_runtime
++   6: gen_todo::main
++note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+# 2024-08-20 10:20:15.569953
++/ls
+
+# 2024-08-20 10:20:24.169080
++thread 'main' panicked at src/main.rs:9:33:
++Failed to load configuration: missing field `frontend_url`
++stack backtrace:
++   0: _rust_begin_unwind
++   1: core::panicking::panic_fmt
++   2: core::result::unwrap_failed
++   3: gen_todo::main::{{closure}}
++   4: tokio::runtime::park::CachedParkThread::block_on
++   5: tokio::runtime::context::runtime::enter_runtime
++   6: gen_todo::main
++note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+
+# 2024-08-20 10:33:10.519118
++/ls
+
+# 2024-08-20 10:33:18.703052
++/drop config/development.toml
+
+# 2024-08-20 10:33:21.972544
++/drop config/production.toml
+
+# 2024-08-20 10:33:25.349542
++/drop config/test.toml
+
+# 2024-08-20 10:33:32.639156
++Write a clap script that creates the database, based on the values from config.rs. If necessary, or beneficial, add a cfg(test) section to the config file. Make sure that you don't add any control logic to code, and only use config values. This script should go in a seperate file in the cli directory, and be called from the standard cli file.
+
+# 2024-08-20 10:36:57.733819
++warning: unused import: `ArgMatches`
++ --> src/cli/create_db.rs:1:21
++  |
++1 | use clap::{Command, ArgMatches};
++  |                     ^^^^^^^^^^
++  |
++  = note: `#[warn(unused_imports)]` on by default
++
++warning: unused import: `clap::Command`
++ --> src/main.rs:5:5
++  |
++5 | use clap::Command;
++  |     ^^^^^^^^^^^^^
++
++error[E0599]: no method named `execute_unprepared` found for enum `DatabaseConnection` in the current scope
++   --> src/cli/create_db.rs:22:8
++    |
++22  |     db.execute_unprepared(&create_db_query).await?;
++    |        ^^^^^^^^^^^^^^^^^^ method not found in `DatabaseConnection`
++    |
++   ::: /Users/johndavenport/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sea-orm-1.0.0/src/database/connection.rs:19:14
++    |
++19  |     async fn execute_unprepared(&self, sql: &str) -> Result...
++    |              ------------------ the method is available for `DatabaseConnection` here
++    |
++note: the method `execute_unprepared` exists on the type `sea_orm::SqlxPostgresPoolConnection`
++   --> /Users/johndavenport/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sea-orm-1.0.0/src/driver/sqlx_postgres.rs:118:5
++    |
++118 |     #[instrument(level = "trace")]
++    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++    = help: items from traits can only be used if the trait is in scope
++    = note: this error originates in the attribute macro `instrument` (in Nightly builds, run with -Z macro-backtrace for more info)
++help: trait `ConnectionTrait` which provides `execute_unprepared` is implemented but not in scope; perhaps you want to import it
++    |
++1   + use sea_orm::ConnectionTrait;
++    |
++
++For more information about this error, try `rustc --explain E0599`.
++warning: `gen_todo` (bin "gen_todo") generated 2 warnings
++error: could not compile `gen_todo` (bin "gen_todo") due to 1 previous error; 2 warnings emitted
+
+# 2024-08-20 10:40:13.952217
++Write a basic hello world test and place it in an appropriate directory 
+
+# 2024-08-20 10:40:55.943885
++Create shell script for running cargo-watch with appropriate flags https://crates.io/crates/cargo-watch
+
+# 2024-08-20 10:45:43.884000
++/add archi
+
+# 2024-08-20 10:45:48.596052
++/add design/architecture.md
+
+# 2024-08-20 10:45:51.580065
++/add design/tech_stack.md
+
+# 2024-08-20 10:45:59.651898
++/add design/test_strategy.md
+
+# 2024-08-20 10:46:29.851610
++Add tests/utils.rs file. This is the purpose of the tests/utils.rs file:
++
++# tests/utils.rs Explanation
++
++## Purpose
++The tests/utils.rs file serves as a central location for shared testing utilities, helpers, and setup/teardown functions. Its main goals are to:
++
++1. Reduce code duplication across test files
++2. Provide consistent test environments
++3. Simplify the setup of complex test scenarios
++4. Improve the readability and maintainability of test code
++
++## Common Contents
++
++1. Test Database Setup
++   - Functions to create and tear down a test database
++   - Utilities to seed the database with test data
++
++2. Mock Data Generation
++   - Functions to create mock Task, User, or other model instances
++
++3. Authentication Helpers
++   - Utilities to create authenticated test requests
++
++4. Custom Assertions
++   - Helper functions for common test assertions specific to your app
++
++5. Test App Configuration
++   - Functions to set up a test instance of your Axum application
++
++6. Fixtures
++   - Reusable data structures for tests
++
++## Example Structure
++
++```rust
++use your_app::{Config, create_app};
++use axum::Router;
++use sea_orm::{Database, DatabaseConnection};
++use uuid::Uuid;
++
++pub async fn setup_test_db() -> DatabaseConnection {
++    let db_url = format!("postgres://postgres:password@localhost/test_db_{}", Uuid::new_v4());
++    // Create database
++    // Run migrations
++    Database::connect(&db_url).await.expect("Failed to connect to test database")
++}
++
++pub async fn teardown_test_db(conn: DatabaseConnection) {
++    // Drop the test database
++}
++
++pub fn create_test_task() -> Task {
++    Task {
++        id: Uuid::new_v4(),
++        title: "Test Task".to_string(),
++        description: "This is a test task".to_string(),
++        status: TaskStatus::Todo,
++        // ... other fields ...
++    }
++}
++
++pub async fn create_test_app() -> Router {
++    let config = Config::for_test();
++    let db = setup_test_db().await;
++    create_app(config, db)
++}
++
++pub async fn authenticated_request(app: Router, path: &str) -> Response {
++    // Create an authenticated request to the app
++}
++
++// Add more utility functions as needed
++```
+
+# 2024-08-20 10:47:46.579455
++error[E0433]: failed to resolve: use of undeclared crate or module `gen_todo`
++ --> tests/utils.rs:1:5
++  |
++1 | use gen_todo::{config::Config, create_app};
++  |     ^^^^^^^^ use of undeclared crate or module `gen_todo`
++
++error[E0432]: unresolved import `gen_todo`
++ --> tests/utils.rs:1:5
++  |
++1 | use gen_todo::{config::Config, create_app};
++  |     ^^^^^^^^ use of undeclared crate or module `gen_todo`
++
++Some errors have detailed explanations: E0432, E0433.
++For more information about an error, try `rustc --explain E0432`.
++error: could not compile `gen_todo` (test "utils") due to 2 previous errors
+
+# 2024-08-20 10:48:51.931048
++Write a a basic doc comment in main.rs
+
+# 2024-08-20 10:50:01.387748
++error[E0432]: unresolved imports `crate::config`, `crate::create_app`
++ --> tests/utils.rs:1:13
++  |
++1 | use crate::{config::Config, create_app};
++  |             ^^^^^^          ^^^^^^^^^^ no `create_app` in the root
++  |             |
++  |             unresolved import
++  |             help: a similar path exists: `gen_todo::config`
++
++For more information about this error, try `rustc --explain E0432`.
++error: could not compile `gen_todo` (test "utils") due to 1 previous error

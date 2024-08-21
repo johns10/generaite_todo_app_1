@@ -37,5 +37,5 @@ coverage/
 /test-results
 
 # Project specific
-.aider*
+.aider.tags*
 playwright
